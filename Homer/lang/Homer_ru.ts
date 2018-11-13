@@ -747,6 +747,10 @@
         <source>Start minimized:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>3840 * 2160</source>
+        <translation type="unfinished">1056 * 2160 {3840 ?}</translation>
+    </message>
 </context>
 <context>
     <name>ContactEditDialog</name>
@@ -1211,10 +1215,6 @@
         <translation>Связь с сервером не удалось</translation>
     </message>
     <message>
-        <source>Library Qt:</source>
-        <translation>Библиотеки Qt:</translation>
-    </message>
-    <message>
         <source>Linked SWScale:</source>
         <translation>Линк для SWScale: </translation>
     </message>
@@ -1264,6 +1264,14 @@
     </message>
     <message>
         <source>Can not download help data on project server</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Library Qt (compile time):</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Library Qt (runtime):</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1517,41 +1525,6 @@ Homer Conferencing will be stopped afterwards!</source>
     <message>
         <source>is not possible!</source>
         <translation>не возможно!</translation>
-    </message>
-</context>
-<context>
-    <name>Homer::Gui::OverviewChannelsWidget</name>
-    <message>
-        <source>Add channel</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Select channel</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit channel</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Duplicate channel</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Delete channel</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Reset channel list</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Save channel list</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Load channel list</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1861,10 +1834,6 @@ Homer Conferencing will be stopped afterwards!</source>
     </message>
     <message>
         <source>Add directory to playlist</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Channel list</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3219,29 +3188,6 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
-    <name>OverviewChannelsWidget</name>
-    <message>
-        <source>Channel list</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>save contact list</source>
-        <translation type="unfinished">сохранить список контактов</translation>
-    </message>
-    <message>
-        <source>load contact list</source>
-        <translation type="unfinished">загрузить список контактов</translation>
-    </message>
-    <message>
-        <source>Add contact</source>
-        <translation type="unfinished">Добавить контакт</translation>
-    </message>
-    <message>
-        <source>Remove contact(s)</source>
-        <translation type="unfinished">Удалить контакт (ы)</translation>
-    </message>
-</context>
-<context>
     <name>OverviewContactsWidget</name>
     <message>
         <source>Remove contact(s)</source>
@@ -3512,6 +3458,10 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Mem(virt.)</source>
         <translation>Память(вирт.)</translation>
+    </message>
+    <message>
+        <source>Mallocs</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

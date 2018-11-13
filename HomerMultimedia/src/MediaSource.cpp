@@ -255,7 +255,6 @@ void MediaSource::LogSupportedVideoCodecs(bool pSendToLoggerOnly)
     FfmpegInit();
 
     AVCodec *tCodec = av_codec_next(NULL);
-    AVCodec *tNextCodec = av_codec_next(tCodec);
 
     string tIntro = "Supported video codecs:\n"
                     " D . = Decoding supported\n"
@@ -270,16 +269,9 @@ void MediaSource::LogSupportedVideoCodecs(bool pSendToLoggerOnly)
     {
         if (tCodec->type == AVMEDIA_TYPE_VIDEO)
         {
-            bool tDecode = (tCodec->decode != NULL);
-            bool tEncode = false;
-            tEncode = (tCodec->encode2 != NULL);
+            const bool tDecode = av_codec_is_decoder(tCodec) != 0;
+            const bool tEncode = av_codec_is_encoder(tCodec) != 0;
 
-            if ((tNextCodec != NULL) && (strcmp(tCodec->name, tNextCodec->name) == 0))
-            {
-                tEncode |= (tNextCodec->encode2 != NULL);
-                tDecode |= (tNextCodec->decode != NULL);
-                tCodec = tNextCodec;
-            }
             if (pSendToLoggerOnly)
                 LOGEX(MediaSource, LOG_VERBOSE, " %s %s  %-15s %s", tDecode ? "D" : " ", tEncode ? "E" : " ", tCodec->name, tCodec->long_name ? tCodec->long_name : "");
             else
@@ -288,8 +280,24 @@ void MediaSource::LogSupportedVideoCodecs(bool pSendToLoggerOnly)
 
         // go to next
         tCodec = av_codec_next(tCodec);
-        if (tCodec != NULL)
-            tNextCodec = av_codec_next(tCodec);
+    }
+    string tHwIntro = "Supported HW accelerators:\n";
+
+    if (pSendToLoggerOnly)
+        LOGEX(MediaSource, LOG_VERBOSE, "%s", tHwIntro.c_str());
+    else
+        printf("%s\n", tHwIntro.c_str());
+    AVHWAccel *tHwaccel = av_hwaccel_next(NULL);
+    while (tHwaccel)
+    {
+        if (tHwaccel->type == AVMEDIA_TYPE_VIDEO)
+        {
+            if (pSendToLoggerOnly)
+                LOGEX(MediaSource, LOG_VERBOSE, "%s", tHwaccel->name);
+            else
+                printf("%s\n", tHwaccel->name);
+        }
+        tHwaccel = av_hwaccel_next(tHwaccel);
     }
     Thread::Suspend(1 * 1000 * 1000);
 }
@@ -898,6 +906,10 @@ void MediaSource::VideoFormat2Resolution(VideoFormat pFormat, int& pX, int& pY)
                     pX = 1920;
                     pY = 1080;
                     break;
+        case UHD:       /*     3840 x 2160       */
+                pX = 3840;
+                pY = 2160;
+                break;
     }
 }
 
@@ -956,7 +968,12 @@ void MediaSource::VideoString2Resolution(string pString, int& pX, int& pY)
         pX = 1920;
         pY = 1080;
     }
-    //LOGEX(MediaSource, LOG_VERBOSE, "Derived video resolution: %d*%d", pX, pY);
+    if (pString == "3840 * 2160")
+    {
+        pX = 3840;
+        pY = 2160;
+    }
+    LOGEX(MediaSource, LOG_ERROR, "Derived video resolution: %d*%d", pX, pY);
 }
 
 bool MediaSource::SupportsDecoderFrameStatistics()

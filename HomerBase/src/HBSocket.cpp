@@ -1231,7 +1231,7 @@ string Socket::GetAddrFromDescriptor(SocketAddressDescriptor *tAddressDescriptor
             	*pPort = (unsigned int)ntohs(tAddressDescriptor->sa_in6.sin6_port);
             break;
         default:
-        	LOGEX(Socket, LOG_ERROR, "Unsupported address family detected");
+            LOGEX(Socket, LOG_ERROR, "Unsupported address family detected %d, %u", tAddressDescriptor->sa_stor.ss_family, tAddressDescriptor->sa_in.sin_addr.s_addr);
        		break;
     }
 

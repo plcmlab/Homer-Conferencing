@@ -56,7 +56,7 @@ namespace Homer { namespace Multimedia {
 ///////////////////////////////////////////////////////////////////////////////
 
 // video/audio processing
-#define MEDIA_SOURCE_AV_CHUNK_BUFFER_SIZE                         16 * 1000 * 1000 // HDTV RGB32 picture: 1920*1080*4 = ca. 7,9 MB
+#define MEDIA_SOURCE_AV_CHUNK_BUFFER_SIZE                         40 * 1000 * 1000 // UHD RGB32 picture: 3840*2160*4 = ca. 31.6 MB
 
 // audio processing
 #define MEDIA_SOURCE_MAX_AUDIO_CHANNELS                           32
@@ -81,6 +81,7 @@ enum VideoFormat
     EDTV,       /*     1280 x 720       */
     CIF16,      /*     1408 × 1152      */
     HDTV,       /*     1920 x 1080      */
+    UHD,       /*     3840 x 2160      */
 };
 
 enum VideoDeviceType{

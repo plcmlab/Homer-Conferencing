@@ -57,8 +57,8 @@ using namespace Homer::Monitor;
 
 ///////////////////////////////////////////////////////////////////////////////
 
-#define                     MAX_WIDTH                       1920 * 3
-#define                     MAX_HEIGHT                      1080 * 2
+#define                     MAX_WIDTH                       3840 * 3
+#define                     MAX_HEIGHT                      2160 * 2
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -667,6 +667,10 @@ GrabResolutions MediaSourceDesktop::GetSupportedVideoGrabResolutions()
     tFormat.Name="WUXGA";       //     1920 * 1200
     tFormat.ResX = 1920;
     tFormat.ResY = 1200;
+    mSupportedVideoFormats.push_back(tFormat);
+    tFormat.Name="UHD";       //     3840 * 2160
+    tFormat.ResX = 3840;
+    tFormat.ResY = 2160;
     mSupportedVideoFormats.push_back(tFormat);
 
     QDesktopWidget *tDesktop = QApplication::desktop();

@@ -346,6 +346,11 @@ GrabResolutions MediaSourceLogo::GetSupportedVideoGrabResolutions()
     tFormat.ResY = 1200;
     mSupportedVideoFormats.push_back(tFormat);
 
+    tFormat.Name="UHD";       //     3840 * 2160
+    tFormat.ResX = 3840;
+    tFormat.ResY = 2160;
+    mSupportedVideoFormats.push_back(tFormat);
+
     tFormat.Name="Original";
     tFormat.ResX = 640;
     tFormat.ResY = 480;

@@ -167,6 +167,8 @@ int ConfigurationDialog::VideoString2ResolutionIndex(string pString)
         tResult = 8;
     if (pString == "1920 * 1080")
         tResult = 9;
+    if (pString == "3840 * 2160")
+        tResult = 10;
 
     return tResult;
 }
