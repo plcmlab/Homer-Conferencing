@@ -1642,6 +1642,7 @@ void MainWindow::customEvent(QEvent* pEvent)
                     //######################## CALL MEDIA UPDATE ############################
                     tCMUEvent = (CallMediaUpdateEvent*) tEvent;
                     // search for corresponding participant widget
+                    LOG(LOG_VERBOSE, "skashin!!!!!: CALL MEDIA UPDATE");
                     tParticipantWidget = GetParticipantWidget(QString(tCMUEvent->Sender.c_str()), tCMUEvent->Transport);
                     if(tParticipantWidget != NULL)
                     {

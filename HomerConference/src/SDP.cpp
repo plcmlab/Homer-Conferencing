@@ -292,14 +292,19 @@ unsigned int SDP::GetRTPAudioPayloadID(int pCodecID)
     return tResult;
 }
 
-string SDP::CreateSdpData(int pAudioPort, int pVideoPort)
+string SDP::CreateSdpData(int pAudioPort, int pVideoPort, uint32_t pBandwidth)
 {
     string tResult = "";
     unsigned int tAudioCodec = GetAudioCodec();
     unsigned int tVideoCodec = GetVideoCodec();
 
-    LOG(LOG_VERBOSE, "Create SDP packet for audio port: %d and video port: %d", pAudioPort, pVideoPort);
+    LOG(LOG_VERBOSE, "Create SDP packet for audio port: %d and video port: %u with bandwidth", pAudioPort, pVideoPort, pBandwidth);
     LOG(LOG_VERBOSE, "Supported audio codecs: %d and video codecs: %d", tAudioCodec, tVideoCodec);
+
+    if (pBandwidth != 0) {
+        tResult += "b=AS:" + toString(pBandwidth);
+        tResult += "\r\n";
+    }
 
     // calculate the new audio sdp string
     if (tAudioCodec)
@@ -332,8 +337,10 @@ string SDP::CreateSdpData(int pAudioPort, int pVideoPort)
     {
         // rest is filled by SIP library
         tResult += "m=video " + toString(pVideoPort) + " "  + GetMediaTransportStr(mVideoTransportType) + " " + toString(GetRTPVideoPayloadID(tVideoCodec));
-
         tResult += "\r\n";
+        tResult += "a=sendrecv";
+        tResult += "\r\n";
+
 
         if (tVideoCodec & CODEC_H261)
             tResult += "a=rtpmap:" + toString(RTP::GetPreferedRTPPayloadIDForCodec("h261")) + " H261/90000\r\n";
@@ -355,6 +362,7 @@ string SDP::CreateSdpData(int pAudioPort, int pVideoPort)
             tResult += "a=rtpmap:" + toString(RTP::GetPreferedRTPPayloadIDForCodec("theora")) + " theora/90000\r\n";
         if (tVideoCodec & CODEC_VP8)
             tResult += "a=rtpmap:" + toString(RTP::GetPreferedRTPPayloadIDForCodec("vp8")) + " VP8/90000\r\n";
+        tResult += "a=fmtp:111 profile-level-id=64001f; packetization-mode=1; max-br=20010; sar=13\r\n";
     }
 
     LOG(LOG_VERBOSE, "..result: %s", tResult.c_str());

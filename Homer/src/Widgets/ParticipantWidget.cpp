@@ -1006,7 +1006,7 @@ bool ParticipantWidget::IsThisParticipant(QString pParticipant, enum TransportTy
     }else
     {// this participant is located on some foreign host and uses peer-to-peer communication
         LOG(LOG_VERBOSE, "%s =?= %s, %s =?= %s", tHost.toStdString().c_str(), tThisHost.toStdString().c_str(), pParticipant.toStdString().c_str(), mSipInterface.toStdString().c_str());
-        tResult = (tHost == tThisHost) && (mSessionTransport == pParticipantTransport);
+        tResult = (tHost == tThisHost) && (mSessionTransport == pParticipantTransport || ((mSessionTransport == SOCKET_UDP || mSessionTransport == SOCKET_TCP) && (pParticipantTransport == SOCKET_UDP || pParticipantTransport == SOCKET_TCP)));
     }
     LOG(LOG_VERBOSE, "@\"%s\"[%s] - IsThisParticipant \"%s\"[%s](server contact: %d) ? ==> %s", mSessionName.toStdString().c_str(), Socket::TransportType2String(mSessionTransport).c_str(), pParticipant.toStdString().c_str(), Socket::TransportType2String(pParticipantTransport).c_str(), tSearchedParticipantIsServercontact, tResult ? "MATCH" : "no match");
 
@@ -1414,7 +1414,7 @@ void ParticipantWidget::HandleCallAccept(bool pIncoming)
 
 void ParticipantWidget::HandleMediaUpdate(bool pIncoming, QString pRemoteAudioAdr, unsigned int pRemoteAudioPort, QString pRemoteAudioCodec, unsigned int pNegotiatedRTPAudioPayloadID, QString pRemoteVideoAdr, unsigned int pRemoteVideoPort, QString pRemoteVideoCodec, unsigned int pNegotiatedRTPVideoPayloadID)
 {
-    LOG(LOG_VERBOSE, "Media update");
+    LOG(LOG_VERBOSE, "skashin!!!!!: Media update");
 
     // return immediately if we are a preview only
     if (mSessionType == PREVIEW)
@@ -1430,6 +1430,7 @@ void ParticipantWidget::HandleMediaUpdate(bool pIncoming, QString pRemoteAudioAd
     mRemoteVideoPort = pRemoteVideoPort;
     mRemoteVideoCodec = pRemoteVideoCodec;
 
+    LOG(LOG_VERBOSE, "skashin:$$$$$ pRemoteVideoPort=%u", pRemoteVideoPort);
     if ((pRemoteVideoPort != 0) || (pRemoteAudioPort != 0))
     {
         ResetMediaSinks();
@@ -1562,7 +1563,7 @@ void ParticipantWidget::AVSync()
 					if ((tBufferTime > 0) && (tBufferTime > tPreBufferTime + AV_SYNC_MAX_OVER_BUFFERING_DRIFT_UNTIL_RESYNC))
 					{
 	                    LOG(LOG_WARN, "Detected over-buffering for video stream, buffer time: %.2f, limit is: %.2f", tBufferTime, tPreBufferTime + AV_SYNC_MAX_DRIFT_UNTIL_RESYNC);
-	                    tSourceNeedsResync = true;
+//	                    tSourceNeedsResync = true;
 					}
 				#endif
 				#ifdef PARTICIPANT_WIDGET_AV_SYNC_AVOID_UNDER_BUFFERING

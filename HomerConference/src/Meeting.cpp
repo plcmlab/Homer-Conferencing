@@ -637,6 +637,7 @@ bool Meeting::SendCall(string pParticipant, enum TransportType pParticipantTrans
         tCEvent->Receiver = "sip:" + pParticipant;
         tCEvent->Transport = pParticipantTransport;
         tCEvent->HandlePtr = tHandlePtr;
+        tCEvent->setBandwidth(1920); // TODO: fix hardcoded value
         mOutgoingEvents.Fire((GeneralEvent*) tCEvent);
     }
 
@@ -968,7 +969,7 @@ bool Meeting::SendAvailabilityProbe(std::string pUser, std::string pHost, std::s
     return true;
 }
 
-const char* Meeting::GetSdpData(std::string pParticipant, enum TransportType pParticipantTransport)
+const char* Meeting::GetSdpData(std::string pParticipant, enum TransportType pParticipantTransport, uint32_t pBandwidth)
 {
     const char *tResult = "";
     ParticipantList::iterator tIt;
@@ -1004,7 +1005,7 @@ const char* Meeting::GetSdpData(std::string pParticipant, enum TransportType pPa
 
             // ##################### create SDP string #######################
             // set sdp string
-            tIt->Sdp = CreateSdpData(tLocalAudioPort, tLocalVideoPort);
+            tIt->Sdp = CreateSdpData(tLocalAudioPort, tLocalVideoPort, pBandwidth);
 
             tResult = tIt->Sdp.c_str();
             //LOG(LOG_VERBOSE, "VPort: %d\n APort: %d\n SDP: %s\n", tLocalVideoPort, tLocalAudioPort, tResult);
@@ -1187,13 +1188,16 @@ bool Meeting::SearchParticipantAndSetRemoteMediaInformation(std::string pPartici
     bool tFound = false;
     ParticipantList::iterator tIt;
 
-    LOG(LOG_VERBOSE, "Search matching database entry for SearchParticipantAndSetRemoteMediaInformation()");
+    LOG(LOG_VERBOSE, "Search matching database entry for SearchParticipantAndSetRemoteMediaInformation(%s, %d, %s, %u, %s, %u)",
+        pParticipant.c_str(), pParticipantTransport, pVideoHost.c_str(), pVideoPort, pVideoCodec.c_str(), pPayloadIDVideo);
 
     // lock
     mParticipantsMutex.lock();
 
     for (tIt = mParticipants.begin(); tIt != mParticipants.end(); tIt++)
     {
+        LOG(LOG_VERBOSE, "skashin:$$$$$$ checking participant\n user:%s, host:%s, port:%s, transport:%d",
+            tIt->User.c_str(), tIt->Host.c_str(), tIt->Port.c_str(), tIt->Transport);
         if (IsThisParticipant(pParticipant, pParticipantTransport, tIt->User, tIt->Host, tIt->Port, tIt->Transport))
         {
             tIt->RemoteVideoHost = pVideoHost;

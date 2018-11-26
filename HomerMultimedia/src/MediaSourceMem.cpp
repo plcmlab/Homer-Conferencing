@@ -57,7 +57,7 @@ using namespace Homer::Base;
 #define MEDIA_SOURCE_MEM_GRABBING_TIMEOUT                                   0.25 // seconds
 
 // assumed default jitter for end-to-end delay for an A/V transmission
-#define MEDIA_SOURCE_MEM_DEFAULT_E2E_DELAY_JITER                            0.1 //seconds
+#define MEDIA_SOURCE_MEM_DEFAULT_E2E_DELAY_JITER                            0.2 //seconds
 
 // how much time do we want to buffer at maximum?
 #define MEDIA_SOURCE_MEM_FRAME_INPUT_QUEUE_MAX_TIME                         ((System::GetTargetMachineType() != "x86") ? 6.0 : 2.0) // use less memory for 32 bit targets
@@ -512,6 +512,11 @@ GrabResolutions MediaSourceMem::GetSupportedVideoGrabResolutions()
         tFormat.Name="HDTV";       //     1920 � 1080
         tFormat.ResX = 1920;
         tFormat.ResY = 1080;
+        mSupportedVideoFormats.push_back(tFormat);
+
+        tFormat.Name="UHD";       //     3840 x 2160
+        tFormat.ResX = 3840;
+        tFormat.ResY = 2160;
         mSupportedVideoFormats.push_back(tFormat);
 
         if (mMediaSourceOpened)
@@ -2747,7 +2752,7 @@ bool MediaSourceMem::WaitForRTGrabbing()
             }else
             {
                 //#ifdef MSMEM_DEBUG_WAITING_TIMING
-                    LOG(LOG_WARN, "%s %s grabbing is %f ms too late, THRESHOLD: %lld ms", GetMediaTypeStr().c_str(), GetSourceTypeStr().c_str(), tDelay, (int64_t)(MEDIA_SOURCE_MEM_DEFAULT_E2E_DELAY_JITER * 1000));
+//                    LOG(LOG_WARN, "%s %s grabbing is %f ms too late, THRESHOLD: %lld ms", GetMediaTypeStr().c_str(), GetSourceTypeStr().c_str(), tDelay, (int64_t)(MEDIA_SOURCE_MEM_DEFAULT_E2E_DELAY_JITER * 1000));
                 //#endif
             }
         }else

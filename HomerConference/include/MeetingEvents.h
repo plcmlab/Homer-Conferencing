@@ -238,7 +238,21 @@ class CallEvent:
     public TEvent<CallEvent, CALL>
 {
 public:
+    void setBandwidth(uint32_t pBandwidth)
+    {
+        mBandwidth = pBandwidth;
+    }
+
+    uint32_t getBandwidth() const
+    {
+        return mBandwidth;
+    }
+
+public:
     bool AutoAnswering;
+
+private:
+    uint32_t mBandwidth;
 };
 
 class CallRingingEvent:

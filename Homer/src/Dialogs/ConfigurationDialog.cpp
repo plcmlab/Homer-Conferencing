@@ -145,7 +145,7 @@ int ConfigurationDialog::exec()
 
 int ConfigurationDialog::VideoString2ResolutionIndex(string pString)
 {
-    int tResult = 2;
+    int tResult = 0;
 
     if (pString == "auto")
         tResult = 0;

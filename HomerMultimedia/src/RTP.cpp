@@ -2952,7 +2952,7 @@ unsigned int RTP::GetPreferedRTPPayloadIDForCodec(std::string pName)
     if (pName == "h263+")
         tResult = 119;
     if (pName == "h264")
-        tResult = 120;
+        tResult = 111;
     if (pName == "mpeg4")
         tResult = 121;
     if ((pName == "theora") || (pName == "libtheora") /* delivered from AVCodec->name */)

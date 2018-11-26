@@ -907,9 +907,9 @@ void MediaSource::VideoFormat2Resolution(VideoFormat pFormat, int& pX, int& pY)
                     pY = 1080;
                     break;
         case UHD:       /*     3840 x 2160       */
-                pX = 3840;
-                pY = 2160;
-                break;
+                    pX = 3840;
+                    pY = 2160;
+                    break;
     }
 }
 

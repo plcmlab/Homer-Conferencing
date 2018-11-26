@@ -144,7 +144,7 @@ private:
     nua_handle_t ** SearchParticipantAndGetNuaHandleForCalls(string pParticipant, enum TransportType pParticipantTransport);
     bool SearchParticipantByNuaHandleOrName(string &pUser, string &pHost, string &pPort, nua_handle_t *pNuaHandle);
 
-    const char* GetSdpData(std::string pParticipant, enum TransportType pParticipantTransport);
+    const char* GetSdpData(std::string pParticipant, enum TransportType pParticipantTransport, uint32_t pBandwidth);
     std::string CallStateAsString(int pCallState);
 
     Mutex               mParticipantsMutex;

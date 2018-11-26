@@ -275,9 +275,9 @@ bool SIP::IsThisParticipant(string pParticipantUser, string pParticipantHost, st
 {
     bool tResult = false;
 
-    tResult = (((pParticipantUser == pUser) || (pParticipantHost != mSipRegisterServerAddress)) && (pParticipantHost == pHost) && (pParticipantPort == pPort) && (pParticipantTransport == pTransport));
+    tResult = (((pParticipantUser == pUser) || (pParticipantHost != mSipRegisterServerAddress)) && (pParticipantHost == pHost) && (pParticipantPort == pPort) /*&& (pParticipantTransport == pTransport)*/);
 
-    //LOGEX(SIP, LOG_VERBOSE, "Comparing: %s - %s, %s - %s, %s - %s  ==> %s", pParticipantUser.c_str(), pUser.c_str(), pParticipantHost.c_str(), pHost.c_str(), pParticipantPort.c_str(), pPort.c_str(), tResult ? "MATCH" : "different");
+    LOGEX(SIP, LOG_VERBOSE, "Comparing: %s - %s, %s - %s, %s - %s, %d - %d  ==> %s", pParticipantUser.c_str(), pUser.c_str(), pParticipantHost.c_str(), pHost.c_str(), pParticipantPort.c_str(), pPort.c_str(), pParticipantTransport, pTransport, tResult ? "MATCH" : "different");
 
     return tResult;
 }
@@ -1199,6 +1199,7 @@ void SIP::SipCallBack(int pEvent, int pStatus, char const *pPhrase, nua_t *pNua,
     const sip_to_t *tRemote = nua_handle_remote(pNuaHandle);
     const sip_to_t *tLocal = nua_handle_local(pNuaHandle);
 
+    LOG(LOG_VERBOSE, "skashinsip:\n%s", pPhrase);
     LOGEX(SIP, LOG_INFO, "############# SIP-new INCOMING event with ID <%d> and name \"%s\" occurred ###########", pEvent, tEventName);
     if (tCurrentMessage != NULL)
     {
@@ -2711,7 +2712,7 @@ void SIP::SipReceivedCall(const sip_to_t *pSipRemote, const sip_to_t *pSipLocal,
 
 				LOG(LOG_INFO, "CallCallState: %d", tCallState);
 				//LOG(LOG_INFO, "CallLocalSdp: %s", tLocalSdp);
-				LOG(LOG_INFO, "CallRemoteSdp: %s", tRemoteSdp);
+                LOG(LOG_INFO, "CallRemoteSdp: %s", tRemoteSdp);
 				LOG(LOG_INFO, "CallId: %s", pSip->sip_call_id->i_id);
 
 				CallEvent *tCEvent = new CallEvent();
@@ -2936,6 +2937,7 @@ void SIP::SipReceivedCallStateChange(const sip_to_t *pSipRemote, const sip_to_t 
          */
 
         tSdpParsed = sdp_parse(&mSipContext->Home, tRemoteSdp, strlen(tRemoteSdp), sdp_f_insane);
+        LOG(LOG_VERBOSE, "skashin: remote sdp: \n %s", tRemoteSdp);
         if ((tParserError = sdp_parsing_error(tSdpParsed)) != NULL)
             LOG(LOG_INFO, "Error parsing remote SDP with result: %s", tParserError);
         else
@@ -2997,6 +2999,7 @@ void SIP::SipReceivedCallStateChange(const sip_to_t *pSipRemote, const sip_to_t 
                             case sdp_media_video:
                                 tCMUEvent->RemoteVideoAddress = tSdpConnection->c_address;
                                 tCMUEvent->RemoteVideoPort = tMedia->m_port;
+                                LOG(LOG_VERBOSE, "skashin: media port is %u", tMedia->m_port);
                                 tCMUEvent->NegotiatedRTPVideoPayloadID = tMedia->m_rtpmaps->rm_pt;
                                 if (tMedia->m_rtpmaps)
                                     tCMUEvent->RemoteVideoCodec = string(tMedia->m_proto_name) + "(" + string(tMedia->m_rtpmaps->rm_encoding) + ")";
@@ -3380,7 +3383,7 @@ void SIP::SipSendCall(CallEvent *pCEvent)
 
     // initialize SDP protocol parameters
     // set SDP string
-    const char *tSdp = MEETING.GetSdpData(tParticipant, pCEvent->Transport);
+    const char *tSdp = MEETING.GetSdpData(tParticipant, pCEvent->Transport, pCEvent->getBandwidth());
 
     PrintOutgoingMessageInfo(tHandle, pCEvent, "Call");
     LOG(LOG_INFO, "CallSdp: %s", tSdp);
@@ -3413,7 +3416,7 @@ void SIP::SipSendCallAccept(CallAcceptEvent *pCAEvent)
     pCAEvent->Receiver.erase(0, 4);
 
     // get SDP string
-    const char *tSdp = MEETING.GetSdpData(pCAEvent->Receiver, pCAEvent->Transport);
+    const char *tSdp = MEETING.GetSdpData(pCAEvent->Receiver, pCAEvent->Transport, 0);
 
     PrintOutgoingMessageInfo(tHandle, pCAEvent, "CallAccept");
     LOG(LOG_INFO, "CallAcceptSdp: %s", tSdp);
@@ -3661,6 +3664,7 @@ void SIP::SipProcessOutgoingEvents()
         }
         if (tEvent->getType() == CallEvent::type())
         {
+            LOG(LOG_VERBOSE, "skashinsip: eventText:%d\n", ((CallEvent*)tEvent)->AutoAnswering);
             SipSendCall((CallEvent*) tEvent);
         }
         if (tEvent->getType() == CallRingingEvent::type())
