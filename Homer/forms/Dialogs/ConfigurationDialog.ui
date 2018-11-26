@@ -68,7 +68,16 @@
             <bool>false</bool>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_4">
-            <property name="margin">
+            <property name="leftMargin">
+             <number>3</number>
+            </property>
+            <property name="topMargin">
+             <number>3</number>
+            </property>
+            <property name="rightMargin">
+             <number>3</number>
+            </property>
+            <property name="bottomMargin">
              <number>3</number>
             </property>
             <item>
@@ -321,7 +330,16 @@
             <string> Video playback </string>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout">
-            <property name="margin">
+            <property name="leftMargin">
+             <number>3</number>
+            </property>
+            <property name="topMargin">
+             <number>3</number>
+            </property>
+            <property name="rightMargin">
+             <number>3</number>
+            </property>
+            <property name="bottomMargin">
              <number>3</number>
             </property>
             <item>
@@ -407,7 +425,16 @@
             <bool>true</bool>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_5">
-            <property name="margin">
+            <property name="leftMargin">
+             <number>3</number>
+            </property>
+            <property name="topMargin">
+             <number>3</number>
+            </property>
+            <property name="rightMargin">
+             <number>3</number>
+            </property>
+            <property name="bottomMargin">
              <number>3</number>
             </property>
             <item>
@@ -509,6 +536,11 @@
                 <item>
                  <property name="text">
                   <string>1920 * 1080</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>3840 * 2160</string>
                  </property>
                 </item>
                </widget>
@@ -980,7 +1012,16 @@
             <bool>false</bool>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_7">
-            <property name="margin">
+            <property name="leftMargin">
+             <number>3</number>
+            </property>
+            <property name="topMargin">
+             <number>3</number>
+            </property>
+            <property name="rightMargin">
+             <number>3</number>
+            </property>
+            <property name="bottomMargin">
              <number>3</number>
             </property>
             <item>
@@ -1128,7 +1169,16 @@
             <string> Audio playback </string>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_11">
-            <property name="margin">
+            <property name="leftMargin">
+             <number>3</number>
+            </property>
+            <property name="topMargin">
+             <number>3</number>
+            </property>
+            <property name="rightMargin">
+             <number>3</number>
+            </property>
+            <property name="bottomMargin">
              <number>3</number>
             </property>
             <item>
@@ -1301,7 +1351,16 @@
             <bool>true</bool>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_6">
-            <property name="margin">
+            <property name="leftMargin">
+             <number>3</number>
+            </property>
+            <property name="topMargin">
+             <number>3</number>
+            </property>
+            <property name="rightMargin">
+             <number>3</number>
+            </property>
+            <property name="bottomMargin">
              <number>3</number>
             </property>
             <item>
@@ -1720,7 +1779,16 @@ background-color: rgb(200, 200, 200);
             <bool>true</bool>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_8">
-            <property name="margin">
+            <property name="leftMargin">
+             <number>3</number>
+            </property>
+            <property name="topMargin">
+             <number>3</number>
+            </property>
+            <property name="rightMargin">
+             <number>3</number>
+            </property>
+            <property name="bottomMargin">
              <number>3</number>
             </property>
             <item>
@@ -2172,7 +2240,16 @@ background-color: rgb(150, 150, 150);
             <string> Contacting </string>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_12">
-            <property name="margin">
+            <property name="leftMargin">
+             <number>3</number>
+            </property>
+            <property name="topMargin">
+             <number>3</number>
+            </property>
+            <property name="rightMargin">
+             <number>3</number>
+            </property>
+            <property name="bottomMargin">
              <number>3</number>
             </property>
             <item>
@@ -2692,7 +2769,16 @@ background-color: rgb(150, 150, 150);
             <string> GUI look and feel </string>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_13">
-            <property name="margin">
+            <property name="leftMargin">
+             <number>3</number>
+            </property>
+            <property name="topMargin">
+             <number>3</number>
+            </property>
+            <property name="rightMargin">
+             <number>3</number>
+            </property>
+            <property name="bottomMargin">
              <number>3</number>
             </property>
             <item>
@@ -2939,7 +3025,16 @@ background-color: rgb(150, 150, 150);
             <string> Conferencing</string>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_26">
-            <property name="margin">
+            <property name="leftMargin">
+             <number>3</number>
+            </property>
+            <property name="topMargin">
+             <number>3</number>
+            </property>
+            <property name="rightMargin">
+             <number>3</number>
+            </property>
+            <property name="bottomMargin">
              <number>3</number>
             </property>
             <item>
@@ -3067,7 +3162,16 @@ background-color: rgb(150, 150, 150);
             <string> Software updates </string>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_14">
-            <property name="margin">
+            <property name="leftMargin">
+             <number>3</number>
+            </property>
+            <property name="topMargin">
+             <number>3</number>
+            </property>
+            <property name="rightMargin">
+             <number>3</number>
+            </property>
+            <property name="bottomMargin">
              <number>3</number>
             </property>
             <item>
@@ -3131,7 +3235,16 @@ background-color: rgb(150, 150, 150);
             <string> Software components</string>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_15">
-            <property name="margin">
+            <property name="leftMargin">
+             <number>3</number>
+            </property>
+            <property name="topMargin">
+             <number>3</number>
+            </property>
+            <property name="rightMargin">
+             <number>3</number>
+            </property>
+            <property name="bottomMargin">
              <number>3</number>
             </property>
             <item>
@@ -3268,8 +3381,8 @@ background-color: rgb(150, 150, 150);
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>431</width>
-              <height>552</height>
+              <width>445</width>
+              <height>532</height>
              </rect>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_24">
@@ -5984,7 +6097,7 @@ background-color: rgb(150, 150, 150);
          <string> Video </string>
         </property>
         <property name="textAlignment">
-         <set>AlignHCenter|AlignVCenter|AlignCenter</set>
+         <set>AlignCenter</set>
         </property>
         <property name="icon">
          <iconset resource="../../resources/Icons.qrc">
@@ -5996,7 +6109,7 @@ background-color: rgb(150, 150, 150);
          <string> Audio </string>
         </property>
         <property name="textAlignment">
-         <set>AlignHCenter|AlignVCenter|AlignCenter</set>
+         <set>AlignCenter</set>
         </property>
         <property name="icon">
          <iconset resource="../../resources/Icons.qrc">
@@ -6008,7 +6121,7 @@ background-color: rgb(150, 150, 150);
          <string> Network </string>
         </property>
         <property name="textAlignment">
-         <set>AlignHCenter|AlignVCenter|AlignCenter</set>
+         <set>AlignCenter</set>
         </property>
         <property name="icon">
          <iconset resource="../../resources/Icons.qrc">
@@ -6020,7 +6133,7 @@ background-color: rgb(150, 150, 150);
          <string> General </string>
         </property>
         <property name="textAlignment">
-         <set>AlignHCenter|AlignVCenter|AlignCenter</set>
+         <set>AlignCenter</set>
         </property>
         <property name="icon">
          <iconset resource="../../resources/Icons.qrc">
@@ -6032,7 +6145,7 @@ background-color: rgb(150, 150, 150);
          <string> Notifications </string>
         </property>
         <property name="textAlignment">
-         <set>AlignHCenter|AlignVCenter|AlignCenter</set>
+         <set>AlignCenter</set>
         </property>
         <property name="icon">
          <iconset resource="../../resources/Icons.qrc">
@@ -6069,9 +6182,6 @@ background-color: rgb(150, 150, 150);
   </layout>
  </widget>
  <resources>
-  <include location="../../resources/Icons.qrc"/>
-  <include location="../../resources/Icons.qrc"/>
-  <include location="../../resources/Icons.qrc"/>
   <include location="../../resources/Icons.qrc"/>
  </resources>
  <connections>
